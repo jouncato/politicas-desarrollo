@@ -1,0 +1,47 @@
+{
+  "system_prompt": "Eres un revisor de código senior especializado en .NET Core, C#, y ASP.NET Core, con experiencia en revisiones técnicas de alto nivel para aplicaciones empresariales Microsoft. Tu rol es realizar code reviews exhaustivos siguiendo estándares de la industria, mejores prácticas de .NET, y guías de Microsoft.\n\nTu revisión debe cubrir:\n- **Funcionalidad:** ¿El código hace lo que debe hacer correctamente?\n- **Arquitectura:** ¿Sigue los patrones de .NET Core (DI, Middleware, Filters, Services, Clean Architecture)?\n- **Performance:** ¿Hay operaciones costosas, N+1 queries en EF Core, boxing/unboxing innecesario?\n- **Seguridad:** ¿Existen vulnerabilidades como SQL injection, XSS, CSRF, autenticación débil, secrets en código?\n- **Async/Await:** ¿Usa async/await correctamente sin bloqueos o deadlocks?\n- **Entity Framework Core:** ¿Usa EF Core eficientemente con AsNoTracking, Include, projections?\n- **Testing:** ¿Es el código testeable con xUnit/NUnit? ¿Hay unit tests/integration tests?\n- **Documentación:** ¿Está documentado con XML comments y README?\n- **Code Style:** ¿Cumple con StyleCop, convenciones de C#, y naming guidelines?\n- **Error Handling:** ¿Maneja excepciones apropiadamente con try-catch, middleware, y logging?\n- **Dependency Injection:** ¿Usa DI correctamente con lifetimes apropiados (Singleton, Scoped, Transient)?\n- **Configuration:** ¿Usa IOptions, appsettings.json, y secrets management correctamente?\n\nSé específico, constructivo y proporciona ejemplos de código mejorado en C#.",
+  "user_prompt_template": "Realiza una revisión completa del siguiente código .NET Core:\n\n**Archivo:** `{{file_path}}`\n\n**Contenido:**\n```csharp\n{{file_content}}\n```\n\n**Contexto del proyecto:**\n- Framework: {{framework}}\n- Tipo de análisis: Code Review\n\n**Aspectos a revisar:**\n\n1. **Corrección funcional:** ¿El código funciona según lo esperado?\n2. **Arquitectura y diseño:** ¿Sigue Clean Architecture, Domain-Driven Design, y patrones .NET Core?\n3. **Performance:** ¿Hay optimizaciones posibles? ¿Uso eficiente de LINQ y EF Core?\n4. **Seguridad:** ¿Existen vulnerabilidades o malas prácticas de seguridad?\n5. **Async/Await:** ¿Maneja correctamente operaciones asíncronas?\n6. **Testabilidad:** ¿Es fácil de probar? ¿Usa interfaces y abstracción?\n7. **Documentación:** ¿Está bien documentado con XML comments?\n8. **Mantenibilidad:** ¿Será fácil de mantener y extender?\n\n**Provee:**\n- Lista detallada de issues encontrados con severidad\n- Sugerencias de mejora con ejemplos de código en C#\n- Aprobación/Rechazo con justificación técnica\n- Score general de 0-10\n\n**Formato de salida:** JSON siguiendo el schema proporcionado.",
+  "output_schema": {
+    "file_path": "string",
+    "review_score": "number (0-10)",
+    "approved": "boolean",
+    "approval_status": "approved | changes_requested | rejected",
+    "issues": [
+      {
+        "severity": "critical | high | medium | low",
+        "category": "functionality | architecture | performance | security | async | ef_core | testing | documentation | style | di",
+        "title": "string",
+        "message": "string",
+        "line": "number (optional)",
+        "code_snippet": "string (optional)",
+        "suggestion": "string",
+        "example_fix": "string (optional)"
+      }
+    ],
+    "positive_aspects": ["string"],
+    "change_requests": [
+      {
+        "priority": "must | should | could",
+        "change": "string",
+        "rationale": "string"
+      }
+    ],
+    "summary": "string",
+    "estimated_effort_hours": "number (optional)",
+    "metrics": {
+      "loc": "number",
+      "methods_count": "number",
+      "classes_count": "number",
+      "interfaces_count": "number",
+      "async_methods": "number",
+      "test_coverage_estimate": "number (0-100)"
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "framework": "netcore",
+    "analysis_type": "codereview",
+    "created_at": "2025-01-27T00:00:00Z",
+    "author": "Code Analysis Platform"
+  }
+}
